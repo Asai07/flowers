@@ -7,6 +7,8 @@
 
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
+
 
       *,
       *::after,
@@ -1257,6 +1259,31 @@
             pointer-events: none;
             z-index: 1;
         }
+.counter {
+            font-family: 'Raleway', sans-serif;
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            color: white;
+            text-shadow: 0 0 10px #287271, 0 0 20px #287271;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 10px #287271, 0 0 20px #287271;
+            }
+            100% {
+                text-shadow: 0 0 15px #287271, 0 0 30px #287271;
+            }
+        }
 @media (max-width: 600px) {
             .title {
                 font-size: 19px;
@@ -1275,6 +1302,7 @@
 
   <body class="not-loaded">
     <canvas class="fireworks" id="fireworksCanvas"></canvas>
+    <div class="counter" id="counter">Felices 0 días juntos</div>
     <h1 class="title" id="title">¿Quieres ser mi San Valentín?</h1>
     <button class="reloadBtn" id="acceptButton" onclick="bloomFlower()">¡Acepto!</button>
     <audio id="song" src="turningpage.mp3"></audio>
@@ -1597,6 +1625,7 @@ function bloomFlower() {
                 document.querySelector('.reloadBtn').textContent = '¡Gracias!';
                 document.getElementById("song").play();
                 startFireworks();
+                animateCounter(1300);
                 // Ocultar el título y el botón con una animación suave
             document.getElementById("title").style.opacity = "0";
             document.getElementById("acceptButton").style.opacity = "0";
@@ -1609,7 +1638,19 @@ function bloomFlower() {
             }
         }
 
-        
+        function animateCounter(target) {
+            let counterElement = document.getElementById("counter");
+            counterElement.style.opacity = "1";
+            let count = 0;
+            let interval = setInterval(() => {
+                count += 10;
+                counterElement.textContent = `Felices ${count} días juntos`;
+                if (count >= target) {
+                    clearInterval(interval);
+                    counterElement.textContent = `Felices ${target} días juntos`;
+                }
+            }, 30);
+        }
         function startFireworks() {
             const canvas = document.getElementById("fireworksCanvas");
             const ctx = canvas.getContext("2d");
