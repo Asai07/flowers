@@ -1290,7 +1290,7 @@
                 margin-bottom: 10px;
             }
             .counter {
-                font-size: 20px;
+                font-size: 24px;
                 margin-bottom: 10px;
             }
             .flowers {
@@ -1648,10 +1648,10 @@ function bloomFlower() {
             let count = 0;
             let interval = setInterval(() => {
                 count += 10;
-                counterElement.textContent = `Felices ${count} días juntos`;
+                counterElement.textContent = `Felices ${count} <br>días juntos`;
                 if (count >= target) {
                     clearInterval(interval);
-                    counterElement.textContent = `Felices ${target} días juntos`;
+                    counterElement.textContent = `Felices ${target}<br> días juntos`;
                 }
             }, 30);
         }
