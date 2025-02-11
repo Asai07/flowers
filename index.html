@@ -1643,18 +1643,19 @@ function bloomFlower() {
         }
 
         function animateCounter(target) {
-            let counterElement = document.getElementById("counter");
-            counterElement.style.opacity = "1";
-            let count = 0;
-            let interval = setInterval(() => {
-                count += 10;
-                counterElement.textContent = `Felices ${count} <br>días juntos`;
-                if (count >= target) {
-                    clearInterval(interval);
-                    counterElement.textContent = `Felices ${target}<br> días juntos`;
-                }
-            }, 30);
+    let counterElement = document.getElementById("counter");
+    counterElement.style.opacity = "1";
+    let count = 0;
+    let interval = setInterval(() => {
+        count += 10;
+        counterElement.innerHTML = `Felices ${count} <br> días juntos`;
+        if (count >= target) {
+            clearInterval(interval);
+            counterElement.innerHTML = `Felices ${target} <br> días juntos`;
         }
+    }, 30);
+}
+
         function startFireworks() {
             const canvas = document.getElementById("fireworksCanvas");
             const ctx = canvas.getContext("2d");
