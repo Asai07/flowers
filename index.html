@@ -1289,8 +1289,9 @@
                 font-size: 19px;
                 margin-bottom: 10px;
             }
-          .counter {
-                font-size: 19px;
+            .counter {
+                font-size: 16px;
+                margin-bottom: 10px;
             }
             .flowers {
                 gap: 10px;
@@ -1622,41 +1623,38 @@
 
     <script>
 
-function getDaysSince(startDate) {
-            const start = new Date(startDate);
-            const today = new Date();
-            const diffTime = today - start;
-            return Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        }
-
-        function updateCounter() {
-            const startDate = "2021-07-01"; // Cambia esta fecha de inicio
-            const daysPassed = getDaysSince(startDate);
-            document.getElementById("counter").textContent = `Felices ${daysPassed} días juntos`;
-        }
-
-        function bloomFlower() {
+function bloomFlower() {
             if (document.body.classList.contains('not-loaded')) {
                 document.body.classList.remove("not-loaded");
                 document.querySelector('.reloadBtn').textContent = '¡Gracias!';
                 document.getElementById("song").play();
                 startFireworks();
-                updateCounter();
+                animateCounter(1300);
                 // Ocultar el título y el botón con una animación suave
-                document.getElementById("title").style.opacity = "0";
-                document.getElementById("acceptButton").style.opacity = "0";
-                setTimeout(() => {
-                    document.getElementById("title").style.display = "none";
-                    document.getElementById("acceptButton").style.display = "none";
-                }, 500);
+            document.getElementById("title").style.opacity = "0";
+            document.getElementById("acceptButton").style.opacity = "0";
+            setTimeout(() => {
+                document.getElementById("title").style.display = "none";
+                document.getElementById("acceptButton").style.display = "none";
+            }, 500);
             } else {
                 location.reload();
             }
         }
 
-        // Actualizar contador al cargar la página
-        document.addEventListener("DOMContentLoaded", updateCounter);
-    
+        function animateCounter(target) {
+            let counterElement = document.getElementById("counter");
+            counterElement.style.opacity = "1";
+            let count = 0;
+            let interval = setInterval(() => {
+                count += 10;
+                counterElement.textContent = `Felices ${count} días juntos`;
+                if (count >= target) {
+                    clearInterval(interval);
+                    counterElement.textContent = `Felices ${target} días juntos`;
+                }
+            }, 30);
+        }
         function startFireworks() {
             const canvas = document.getElementById("fireworksCanvas");
             const ctx = canvas.getContext("2d");
