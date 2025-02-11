@@ -1289,9 +1289,6 @@
                 font-size: 19px;
                 margin-bottom: 10px;
             }
-            .counter{
-                font-size: 19px;
-            }
             .flowers {
                 gap: 10px;
             }
@@ -1641,17 +1638,18 @@ function bloomFlower() {
             }
         }
 
-        function getDaysSince(startDate) {
-            const start = new Date(startDate);
-            const today = new Date();
-            const diffTime = today - start;
-            return Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        }
-
-        function updateCounter() {
-            const startDate = "2021-07-01"; // Cambia esta fecha de inicio
-            const daysPassed = getDaysSince(startDate);
-            document.getElementById("counter").textContent = `Felices ${daysPassed} días juntos`;
+        function animateCounter(target) {
+            let counterElement = document.getElementById("counter");
+            counterElement.style.opacity = "1";
+            let count = 0;
+            let interval = setInterval(() => {
+                count += 10;
+                counterElement.textContent = `Felices ${count} días juntos`;
+                if (count >= target) {
+                    clearInterval(interval);
+                    counterElement.textContent = `Felices ${target} días juntos`;
+                }
+            }, 30);
         }
         function startFireworks() {
             const canvas = document.getElementById("fireworksCanvas");
@@ -1708,7 +1706,7 @@ function bloomFlower() {
             animateFireworks();
             
         }
-       document.addEventListener("DOMContentLoaded", updateCounter);
+            
     </script>
   </body>
 </html>
